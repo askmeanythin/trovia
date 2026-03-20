@@ -1,25 +1,190 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react'
+import './App.css'
 
-function App() {
+const itinerary = [
+  { day: 1, title: "Delhi → Kullu", desc: "Overnight Volvo bus journey. Scenic mountain roads begin.", emoji: "🚌" },
+  { day: 2, title: "Arrival in Kullu → Manali", desc: "Hotel check-in, explore Mall Road, relax & enjoy local food.", emoji: "🌄" },
+  { day: 3, title: "Manali Local Sightseeing", desc: "Hadimba Temple, Old Manali cafes, riverside walk.", emoji: "🌲" },
+  { day: 4, title: "Manali → Solang Valley", desc: "Paragliding, zipline, snow views. Overnight stay.", emoji: "🏔️" },
+  { day: 5, title: "Solang → Jobra → Chika Camp", desc: "Trek starts (~2–3 hrs). First campsite experience.", emoji: "🥾" },
+  { day: 6, title: "Chika → Balu Ka Ghera", desc: "Riverside trekking, open valley landscapes, camp under stars.", emoji: "🌿" },
+  { day: 7, title: "Hampta Pass Crossing 🔥", desc: "Cross Hampta Pass — snow, dramatic views, descend to Shea Goru.", emoji: "❄️" },
+  { day: 8, title: "Shea Goru → Chandratal Lake", desc: "Visit the Moon Lake 🌙 — one of the most beautiful spots on earth.", emoji: "🌊" },
+  { day: 9, title: "Return to Manali", desc: "Drive back, rest, shopping & memories.", emoji: "🔙" },
+  { day: 10, title: "Manali → Delhi", desc: "Return journey. Trip ends with lifetime memories.", emoji: "🏁" },
+]
+
+const included = [
+  "Volvo AC bus (Delhi ↔ Manali)",
+  "9 Nights accommodation (hotel + camps)",
+  "All meals during trek",
+  "Expert trek guide & support staff",
+  "Camping equipment & tents",
+  "First aid & safety gear",
+  "Chandratal Lake visit",
+  "Forest permits & fees",
+]
+
+const excluded = [
+  "Personal travel insurance",
+  "Adventure activities (paragliding, zipline)",
+  "Personal expenses & tips",
+  "Meals in Manali (Days 2–4)",
+  "Any medical emergencies",
+]
+
+export default function App() {
+  const [openDay, setOpenDay] = useState(null)
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}hii
+    <div className="app">
 
-export default App;
+      {/* NAVBAR */}
+      <nav className="navbar">
+        <div className="nav-logo">🏔️ Trovia</div>
+        <div className="nav-links">
+          <a href="#about">About</a>
+          <a href="#itinerary">Itinerary</a>
+          <a href="#includes">Includes</a>
+          <a href="#book" className="nav-cta">Book Now</a>
+        </div>
+      </nav>
+
+      {/* HERO */}
+      <section className="hero">
+        <div className="hero-overlay">
+          <div className="hero-badge">⭐ Most Popular Trek 2025</div>
+          <h1 className="hero-title">Kullu Manali<br />& Hampta Pass</h1>
+          <p className="hero-sub">Delhi → Kullu → Manali → Hampta Pass → Chandratal → Delhi</p>
+          <div className="hero-stats">
+            <div className="stat"><span>📅</span><strong>10 Days</strong><small>Duration</small></div>
+            <div className="stat"><span>📍</span><strong>Himachal Pradesh</strong><small>Location</small></div>
+            <div className="stat"><span>⚡</span><strong>Moderate</strong><small>Difficulty</small></div>
+            <div className="stat"><span>💰</span><strong>₹14,999</strong><small>Per Person</small></div>
+          </div>
+          <a href="#book" className="hero-btn">Explore & Book →</a>
+        </div>
+      </section>
+
+      {/* ABOUT */}
+      <section className="about" id="about">
+        <div className="section-inner">
+          <div className="about-text">
+            <h2>About This Trek</h2>
+            <p>
+              The <strong>Kullu Manali & Hampta Pass Trek</strong> is one of India's most iconic Himalayan adventures.
+              Starting from the lush green valleys of Kullu and Manali, this journey takes you through dense forests,
+              alpine meadows, and dramatic snow-covered passes before ending at the ethereal <strong>Chandratal Lake</strong> — the Moon Lake.
+            </p>
+            <p>
+              Whether you're a first-time trekker or a seasoned adventurer, this trip offers the perfect blend of
+              culture, thrill, and natural beauty. From paragliding in Solang Valley to camping under a blanket of stars,
+              every day brings a new unforgettable experience.
+            </p>
+            <div className="highlights">
+              <div className="highlight-item">🌙 Chandratal Lake Visit</div>
+              <div className="highlight-item">❄️ Cross Hampta Pass</div>
+              <div className="highlight-item">🪂 Paragliding in Solang</div>
+              <div className="highlight-item">⛺ Star Camp Nights</div>
+              <div className="highlight-item">🛕 Hadimba Temple</div>
+              <div className="highlight-item">🍜 Local Himalayan Food</div>
+            </div>
+          </div>
+          <div className="about-card">
+            <h3>Quick Info</h3>
+            <ul>
+              <li><span>🗓️ Duration</span><strong>10 Days / 9 Nights</strong></li>
+              <li><span>📍 Region</span><strong>Himachal Pradesh</strong></li>
+              <li><span>🧗 Difficulty</span><strong>Moderate</strong></li>
+              <li><span>📏 Max Altitude</span><strong>4,270m (Hampta Pass)</strong></li>
+              <li><span>👥 Group Size</span><strong>8 – 20 People</strong></li>
+              <li><span>🌡️ Best Season</span><strong>June – September</strong></li>
+              <li><span>💰 Price</span><strong>₹14,999 / person</strong></li>
+            </ul>
+            <a href="#book" className="quick-book-btn">Reserve Your Spot</a>
+          </div>
+        </div>
+      </section>
+
+      {/* ITINERARY */}
+      <section className="itinerary" id="itinerary">
+        <div className="section-inner">
+          <h2>Day-by-Day Itinerary</h2>
+          <p className="section-sub">Every day is a new adventure — here's what to expect</p>
+          <div className="timeline">
+            {itinerary.map((item) => (
+              <div
+                key={item.day}
+                className={`timeline-item ${openDay === item.day ? 'open' : ''}`}
+                onClick={() => setOpenDay(openDay === item.day ? null : item.day)}
+              >
+                <div className="timeline-header">
+                  <div className="timeline-left">
+                    <span className="day-emoji">{item.emoji}</span>
+                    <div>
+                      <span className="day-label">Day {item.day}</span>
+                      <span className="day-title">{item.title}</span>
+                    </div>
+                  </div>
+                  <span className="toggle-icon">{openDay === item.day ? '▲' : '▼'}</span>
+                </div>
+                {openDay === item.day && (
+                  <div className="timeline-body">{item.desc}</div>
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* INCLUDES / EXCLUDES */}
+      <section className="includes" id="includes">
+        <div className="section-inner">
+          <h2>What's Included</h2>
+          <p className="section-sub">Everything you need for a safe and memorable trek</p>
+          <div className="inc-grid">
+            <div className="inc-box">
+              <h3>✅ Included</h3>
+              <ul>{included.map((i, idx) => <li key={idx}>✔ {i}</li>)}</ul>
+            </div>
+            <div className="inc-box excluded">
+              <h3>❌ Not Included</h3>
+              <ul>{excluded.map((i, idx) => <li key={idx}>✘ {i}</li>)}</ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* CTA */}
+      <section className="cta" id="book">
+        <div className="cta-inner">
+          <div className="cta-text">
+            <h2>Ready for the Adventure?</h2>
+            <p>Limited spots available. Book now and secure your place on this epic Himalayan journey.</p>
+            <div className="cta-price">₹14,999 <span>per person</span></div>
+          </div>
+          <div className="cta-form">
+            <input type="text" placeholder="Your Name" />
+            <input type="email" placeholder="Email Address" />
+            <input type="tel" placeholder="Phone Number" />
+            <select>
+              <option>Select Batch</option>
+              <option>June 2025</option>
+              <option>July 2025</option>
+              <option>August 2025</option>
+              <option>September 2025</option>
+            </select>
+            <button className="cta-btn">🏔️ Book My Trek Now</button>
+          </div>
+        </div>
+      </section>
+
+      {/* FOOTER */}
+      <footer className="footer">
+        <p>🏔️ <strong>Trovia</strong> — Explore the Himalayas with us</p>
+        <p style={{ fontSize: '0.85rem', opacity: 0.7 }}>© 2025 Trovia. All rights reserved.</p>
+      </footer>
+
+    </div>
+  )
+}
