@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
 import './App.css'
+import Masonry from './components/Masonry/Masonry'
+import ClickSpark from './ClickSpark'
 
 const itinerary = [
   { day: 1, title: "Delhi → Kullu", desc: "Overnight Volvo bus journey. Scenic mountain roads begin.", emoji: "🚌" },
@@ -33,11 +35,35 @@ const excluded = [
   "Any medical emergencies",
 ]
 
+const masonryItems = [
+  { id: "1",  img: "https://picsum.photos/id/1015/600/900", url: "#", height: 400 },
+  { id: "2",  img: "https://picsum.photos/id/1011/600/750", url: "#", height: 250 },
+  { id: "3",  img: "https://picsum.photos/id/1020/600/800", url: "#", height: 600 },
+  { id: "4",  img: "https://picsum.photos/id/1018/600/700", url: "#", height: 350 },
+  { id: "5",  img: "https://picsum.photos/id/1033/600/850", url: "#", height: 500 },
+  { id: "6",  img: "https://picsum.photos/id/1043/600/600", url: "#", height: 300 },
+  { id: "7",  img: "https://picsum.photos/id/1047/600/750", url: "#", height: 420 },
+  { id: "8",  img: "https://picsum.photos/id/1055/600/800", url: "#", height: 380 },
+  { id: "9",  img: "https://picsum.photos/id/1060/600/700", url: "#", height: 420 },
+  { id: "10", img: "https://picsum.photos/id/1067/600/900", url: "#", height: 600 },
+  { id: "11", img: "https://picsum.photos/id/1074/600/750", url: "#", height: 450 },
+  { id: "12", img: "https://picsum.photos/id/1080/600/800", url: "#", height: 520 },
+  { id: "13", img: "https://picsum.photos/id/1015/600/900", url: "#", height: 400 },
+  { id: "14", img: "https://picsum.photos/id/1011/600/750", url: "#", height: 400 },
+  { id: "15", img: "https://picsum.photos/id/1020/600/800", url: "#", height: 400 },
+]
+
 export default function App() {
   const [openDay, setOpenDay] = useState(null)
 
   return (
-    <div className="app">
+    <ClickSpark
+      sparkColor='#00FFFF'
+      sparkSize={10}
+      sparkRadius={15}
+      sparkCount={8}
+      duration={400}
+    >
 
       {/* NAVBAR */}
       <nav className="navbar">
@@ -52,15 +78,28 @@ export default function App() {
 
       {/* HERO */}
       <section className="hero">
-        <div className="hero-overlay">
+        <div className="hero-masonry-bg">
+          <Masonry
+            items={masonryItems}
+            ease="power3.out"
+            duration={0.6}
+            stagger={0.05}
+            animateFrom="bottom"
+            scaleOnHover
+            hoverScale={0.95}
+            blurToFocus
+            colorShiftOnHover={false}
+          />
+        </div>
+        <div className="hero-overlay" />
+        <div className="hero-content">
           <div className="hero-badge">⭐ Most Popular Trek 2025</div>
-          <h1 className="hero-title">Kullu Manali<br />& Hampta Pass</h1>
-          <p className="hero-sub">Delhi → Kullu → Manali → Hampta Pass → Chandratal → Delhi</p>
+          <h1 className="hero-title">Kullu Manali<br /><span>& Hampta Pass</span></h1>
+          <p className="hero-sub">Chase the mountains, live the adventure</p>
           <div className="hero-stats">
             <div className="stat"><span>📅</span><strong>10 Days</strong><small>Duration</small></div>
             <div className="stat"><span>📍</span><strong>Himachal Pradesh</strong><small>Location</small></div>
-            <div className="stat"><span>⚡</span><strong>Moderate</strong><small>Difficulty</small></div>
-            <div className="stat"><span>💰</span><strong>₹14,999</strong><small>Per Person</small></div>
+            <div className="stat"><span>💰</span><strong>₹7,999</strong><small>Per Person</small></div>
           </div>
           <a href="#book" className="hero-btn">Explore & Book →</a>
         </div>
@@ -145,11 +184,11 @@ export default function App() {
           <div className="inc-grid">
             <div className="inc-box">
               <h3>✅ Included</h3>
-              <ul>{included.map((i, idx) => <li key={idx}>✔ {i}</li>)}</ul>
+              <ul>{included.map((i) => <li key={i}>✔ {i}</li>)}</ul>
             </div>
             <div className="inc-box excluded">
               <h3>❌ Not Included</h3>
-              <ul>{excluded.map((i, idx) => <li key={idx}>✘ {i}</li>)}</ul>
+              <ul>{excluded.map((i) => <li key={i}>✘ {i}</li>)}</ul>
             </div>
           </div>
         </div>
@@ -185,6 +224,6 @@ export default function App() {
         <p style={{ fontSize: '0.85rem', opacity: 0.7 }}>© 2025 Trovia. All rights reserved.</p>
       </footer>
 
-    </div>
+    </ClickSpark>
   )
 }
