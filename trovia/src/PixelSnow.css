@@ -1,0 +1,21 @@
+.pixel-snow-container {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+  pointer-events: none;
+  mix-blend-mode: screen;
+}
+
+.pixel-snow-container canvas {
+  display: block;
+  width: 100% !important;
+  height: 100% !important;
+  mix-blend-mode: screen;
+  background: transparent !important;
+  transform: translateZ(0);
+  will-change: transform;
+  backface-visibility: hidden;
+}

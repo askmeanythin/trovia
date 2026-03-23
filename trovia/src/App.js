@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from 'react'
 import gsap from 'gsap'
 import { MotionPathPlugin } from 'gsap/MotionPathPlugin'
 import ElectricBorder from './ElectricBorder'
+import PixelSnow from './PixelSnow'
 
 import './App.css'
 import Masonry from './components/Masonry/Masonry'
@@ -308,6 +309,20 @@ export default function App() {
           />
         </div>
         <div className="hero-overlay" />
+          <PixelSnow
+            color="#ffffff"
+            flakeSize={0.01}
+            minFlakeSize={1.25}
+            pixelResolution={200}
+            speed={1.25}
+            density={0.7}
+            direction={125}
+            brightness={1}
+            depthFade={8}
+            farPlane={20}
+            gamma={0.4545}
+            variant="round"
+          />
         <div className="hero-content">
           <h1 className="hero-title">Kullu Manali</h1>
           <p className="hero-sub">Chase the mountains, live the adventure</p>
