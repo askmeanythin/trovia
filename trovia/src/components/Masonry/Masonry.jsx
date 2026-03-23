@@ -3,13 +3,18 @@ import { gsap } from 'gsap';
 import './Masonry.css';
 
 const useMedia = (queries, values, defaultValue) => {
-  const get = () => values[queries.findIndex(q => matchMedia(q).matches)] ?? defaultValue;
+  const get = () =>
+    values[queries.findIndex(q => matchMedia(q).matches)] ?? defaultValue;
+
   const [value, setValue] = useState(get);
 
   useEffect(() => {
     const handler = () => setValue(get());
     queries.forEach(q => matchMedia(q).addEventListener('change', handler));
-    return () => queries.forEach(q => matchMedia(q).removeEventListener('change', handler));
+    return () =>
+      queries.forEach(q =>
+        matchMedia(q).removeEventListener('change', handler)
+      );
   }, [queries]);
 
   return value;
@@ -21,10 +26,12 @@ const useMeasure = () => {
 
   useLayoutEffect(() => {
     if (!ref.current) return;
+
     const ro = new ResizeObserver(([entry]) => {
       const { width, height } = entry.contentRect;
       setSize({ width, height });
     });
+
     ro.observe(ref.current);
     return () => ro.disconnect();
   }, []);
@@ -55,21 +62,25 @@ const Masonry = ({ items }) => {
   const [containerRef, { width }] = useMeasure();
   const [imagesReady, setImagesReady] = useState(false);
 
+  // ✅ Updated preload (supports both image & video src)
   useEffect(() => {
-    preloadImages(items.map(i => i.img)).then(() => setImagesReady(true));
+    preloadImages(items.map(i => i.src || i.img)).then(() => setImagesReady(true));
   }, [items]);
 
   const grid = useMemo(() => {
     if (!width) return [];
+
     const colHeights = new Array(columns).fill(0);
     const columnWidth = width / columns;
 
     return items.map(child => {
       const col = colHeights.indexOf(Math.min(...colHeights));
       const x = columnWidth * col;
-      const height = child.height / 2;
+      const height = child.height/2;
       const y = colHeights[col];
+
       colHeights[col] += height;
+
       return { ...child, x, y, w: columnWidth, h: height };
     });
   }, [columns, items, width]);
@@ -83,7 +94,8 @@ const Masonry = ({ items }) => {
       const selector = `[data-key="${item.id}"]`;
 
       if (!hasMounted.current) {
-        gsap.fromTo(selector,
+        gsap.fromTo(
+          selector,
           {
             opacity: 0,
             y: item.y + 100,
@@ -116,7 +128,7 @@ const Masonry = ({ items }) => {
     hasMounted.current = true;
   }, [grid, imagesReady]);
 
-  // ✅ FINAL HOVER (NO CONFLICT)
+  // hover animation
   const handleMouseEnter = (e) => {
     gsap.to(e.currentTarget, {
       y: "-=10",
@@ -145,16 +157,35 @@ const Masonry = ({ items }) => {
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
         >
-          <div
-            className="item-img"
-            style={{ backgroundImage: `url(${item.img})` }}
-          >
+          <div className="item-img">
+
+            {/* ✅ IMAGE / VIDEO SWITCH */}
+            {item.type === "video" ? (
+              <video
+                src={item.src}
+                autoPlay
+                loop
+                muted
+                playsInline
+                className="media"
+                onMouseEnter={(e) => e.target.pause()}
+                onMouseLeave={(e) => e.target.play()}
+              />
+            ) : (
+              <img
+                src={item.src || item.img}
+                alt=""
+                className="media"
+              />
+            )}
+
             <div className="color-overlay"></div>
 
             <div className="item-text">
               <h3>{item.title || "Title"}</h3>
               <p>{item.desc || "Description"}</p>
             </div>
+
           </div>
         </div>
       ))}

@@ -16,21 +16,53 @@ body {
   justify-content: space-between;
   align-items: center;
   padding: 1rem 3rem;
-  background: rgba(255, 255, 255, 0.08);
-  backdrop-filter: blur(0px); /* removed blur so images show through cleanly */
-  border-bottom: 1px solid rgba(255,255,255,0.15);
+  background: rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
-.nav-logo { font-size: 1.4rem; font-weight: 700; color: #fff; }
-.nav-links { display: flex; gap: 2rem; align-items: center; }
-.nav-links a { color: #fff; text-decoration: none; font-weight: 500; transition: opacity 0.2s; }
-.nav-links a:hover { opacity: 0.7; }
+
+.nav-logo {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #fff;
+  text-shadow: 0 1px 4px rgba(0,0,0,0.4);
+}
+
+.nav-links {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+}
+
+.nav-links a {
+  color: #f0f0f0;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s;
+  text-shadow: 0 1px 3px rgba(0,0,0,0.3);
+}
+
+.nav-links a:hover {
+  color: #ffffff;
+  opacity: 1;
+}
+
 .nav-cta {
   background: #2D6A4F;
   color: #fff !important;
   padding: 0.5rem 1.2rem;
   border-radius: 25px;
   font-weight: 600 !important;
+  text-shadow: none;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+  transition: background 0.2s, transform 0.2s;
 }
+
+.nav-cta:hover {
+  background: #245a42 !important;
+  transform: translateY(-1px);
+}
+
 
 /* HERO */
 .hero {
@@ -46,11 +78,11 @@ body {
   position: absolute;
   top: 0;
   left: 0;
-  right: 0;
+  /* right: 0; */
   bottom: 0;
   width: 100%;
   height: 100%;
-  z-index: 0;
+  z-index: 1;
   overflow: hidden;
 }
 
@@ -264,77 +296,455 @@ h2 { font-size: 2rem; font-weight: 800; color: #1a1a1a; margin-bottom: 0.4rem; }
   font-size: 0.95rem;
   line-height: 1.7;
 }
-
-/* INCLUDES */
+/* ── INCLUDES SECTION ────────────────────────── */
 .includes {
-  background: #FFFBB1;
-  padding: 5rem 2rem;
+  padding: 80px 5%;
+  background: linear-gradient(160deg, #ddeef7 0%, #cce2f0 100%);
+  position: relative;
+  overflow: hidden;
 }
-.includes .section-inner { flex-direction: column; }
-.inc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 1rem; }
-.inc-box {
-  background: #fff;
-  border-radius: 16px;
-  padding: 1.8rem;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.07);
-}
-.inc-box h3 { font-size: 1.1rem; margin-bottom: 1rem; color: #2D6A4F; }
-.inc-box.excluded h3 { color: #c0392b; }
-.inc-box ul { list-style: none; display: flex; flex-direction: column; gap: 0.7rem; }
-.inc-box li { font-size: 0.9rem; color: #444; display: flex; align-items: center; gap: 0.5rem; }
 
-/* CTA */
-.cta {
-  background: linear-gradient(135deg, #1a3a4a, #2d5f7a);
-  padding: 5rem 2rem;
-  color: #fff;
+.includes::before {
+  content: '';
+  position: absolute;
+  top: -100px;
+  right: -100px;
+  width: 300px;
+  height: 300px;
+  background: rgba(100, 160, 200, 0.12);
+  border-radius: 50%;
+  filter: blur(60px);
+  pointer-events: none;
 }
-.cta-inner {
-  max-width: 1000px;
+
+.includes-inner {
+  max-width: 1100px;
   margin: 0 auto;
+}
+
+/* Header */
+.includes-header {
+  text-align: center;
+  margin-bottom: 48px;
+}
+
+.includes-badge {
+  display: inline-block;
+  background: rgba(90, 140, 180, 0.15);
+  color: #3a7aa0;
+  border: 1px solid rgba(90, 140, 180, 0.3);
+  border-radius: 20px;
+  padding: 4px 14px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+
+.includes-header h2 {
+  font-size: 2.4rem;
+  font-weight: 800;
+  color: #0f2a3a;
+  margin-bottom: 10px;
+}
+
+.includes-header .section-sub {
+  font-size: 1rem;
+  color: #4a6a80;
+}
+
+/* Grid */
+.inc-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 3rem;
-  align-items: center;
+  gap: 28px;
+  margin-bottom: 32px;
 }
-.cta-text h2 { color: #fff; font-size: 2.2rem; }
-.cta-text p { margin: 1rem 0; color: rgba(255,255,255,0.8); line-height: 1.7; }
-.cta-price { font-size: 2.5rem; font-weight: 800; color: #FFFBB1; }
-.cta-price span { font-size: 1rem; font-weight: 400; color: rgba(255,255,255,0.6); }
-.cta-form {
+
+/* Box base */
+.inc-box {
+  border-radius: 20px;
+  padding: 32px;
+  border: 1.5px solid;
+}
+
+/* Included box */
+.inc-yes {
+  background: #eaf6f0;
+  border-color: #96cfb8;
+  box-shadow: 0 8px 30px rgba(60, 160, 110, 0.1);
+}
+
+/* Not included box */
+.inc-no {
+  background: #f0f7ff;
+  border-color: #8ab8d8;
+  box-shadow: 0 8px 30px rgba(80, 140, 190, 0.1);
+}
+
+/* Box header */
+.inc-box-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 24px;
+  padding-bottom: 16px;
+  border-bottom: 1.5px dashed;
+}
+
+.inc-yes .inc-box-header {
+  border-color: #b0ddc8;
+}
+
+.inc-no .inc-box-header {
+  border-color: #a8ccE0;
+}
+
+.inc-icon {
+  font-size: 1.4rem;
+}
+
+.inc-box-header h3 {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: #0f2a3a;
+  margin: 0;
+}
+
+/* List items */
+.inc-box ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
   display: flex;
   flex-direction: column;
-  gap: 0.8rem;
-  background: rgba(255,255,255,0.08);
-  padding: 2rem;
-  border-radius: 20px;
-  border: 1px solid rgba(255,255,255,0.15);
+  gap: 12px;
 }
-.cta-form input, .cta-form select {
-  padding: 0.85rem 1rem;
-  border-radius: 10px;
-  border: 1px solid rgba(255,255,255,0.2);
-  background: rgba(255,255,255,0.1);
-  color: #fff;
-  font-size: 0.95rem;
-  outline: none;
-}
-.cta-form input::placeholder { color: rgba(255,255,255,0.5); }
-.cta-form select option { background: #1a3a4a; color: #fff; }
-.cta-btn {
-  background: #FFFBB1;
-  color: #1a3a4a;
-  border: none;
-  padding: 1rem;
-  border-radius: 12px;
-  font-size: 1rem;
-  font-weight: 800;
-  cursor: pointer;
-  margin-top: 0.4rem;
-  transition: transform 0.2s, box-shadow 0.2s;
-}
-.cta-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,0.3); }
 
+.inc-box ul li {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 0.92rem;
+  line-height: 1.5;
+}
+
+.inc-check {
+  font-size: 0.85rem;
+  color: #2a9a60;
+  font-weight: 800;
+  margin-top: 2px;
+  flex-shrink: 0;
+  background: #d6f5e6;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.inc-cross {
+  font-size: 0.85rem;
+  color: #c03030;
+  font-weight: 800;
+  margin-top: 2px;
+  flex-shrink: 0;
+  background: #fde0e0;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.inc-yes ul li span:last-child {
+  color: #1a3a28;
+}
+
+.inc-no ul li span:last-child {
+  color: #1a2a3a;
+}
+
+/* Bottom note */
+.includes-note {
+  text-align: center;
+  font-size: 0.88rem;
+  color: #4a6a80;
+  background: #e0eff8;
+  border: 1px dashed #7aaac8;
+  border-radius: 12px;
+  padding: 14px 20px;
+}
+
+.includes-note a {
+  color: #2a6a90;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.includes-note a:hover {
+  text-decoration: underline;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .inc-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .includes-header h2 {
+    font-size: 1.8rem;
+  }
+
+  .inc-box {
+    padding: 24px 20px;
+  }
+}
+
+
+/* ── CTA / BOOK SECTION ──────────────────────── */
+.cta {
+  padding: 90px 5%;
+  background: linear-gradient(135deg, #fffde7 0%, #fef9c3 60%, #fef3a0 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Subtle decorative blobs */
+.cta::before {
+  content: '';
+  position: absolute;
+  top: -80px;
+  left: -80px;
+  width: 340px;
+  height: 340px;
+  background: rgba(212, 168, 0, 0.1);
+  border-radius: 50%;
+  filter: blur(60px);
+  pointer-events: none;
+}
+
+.cta::after {
+  content: '';
+  position: absolute;
+  bottom: -60px;
+  right: -60px;
+  width: 280px;
+  height: 280px;
+  background: rgba(180, 140, 0, 0.08);
+  border-radius: 50%;
+  filter: blur(50px);
+  pointer-events: none;
+}
+
+.cta-inner {
+  display: grid;
+  grid-template-columns: 1fr 460px;
+  gap: 60px;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+/* ── LEFT TEXT ── */
+.cta-badge {
+  display: inline-block;
+  background: rgba(180, 140, 0, 0.12);
+  color: #a07800;
+  border: 1px solid rgba(180, 140, 0, 0.28);
+  border-radius: 20px;
+  padding: 4px 14px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+
+.cta-text h2 {
+  font-size: 3rem;
+  font-weight: 900;
+  color: #2c2a00;
+  line-height: 1.15;
+  margin-bottom: 16px;
+}
+
+.cta-text p {
+  font-size: 1rem;
+  color: #4a4520;
+  line-height: 1.7;
+  margin-bottom: 24px;
+  max-width: 440px;
+}
+
+.cta-price {
+  font-size: 2.8rem;
+  font-weight: 900;
+  color: #b38f00;
+  margin-bottom: 28px;
+  line-height: 1;
+}
+
+.cta-price span {
+  font-size: 1rem;
+  font-weight: 500;
+  color: #7a7040;
+  margin-left: 6px;
+}
+
+/* Trust badges */
+.cta-trust {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 30px;
+}
+
+.trust-item {
+  background: #fefce8;
+  border: 1px solid #dfd96e;
+  border-radius: 8px;
+  padding: 6px 14px;
+  font-size: 0.82rem;
+  color: #3a3600;
+  font-weight: 600;
+  box-shadow: 0 1px 4px rgba(180,160,0,0.08);
+}
+
+
+/* ── FORM CARD ── */
+.cta-form-card {
+  background: #fff9d6;
+  border: 1.5px solid #dfd060;
+  border-radius: 24px;
+  padding: 36px 32px;
+  box-shadow:
+    0 20px 60px rgba(180, 150, 0, 0.13),
+    0 2px 0px #e8d84a inset;
+}
+
+.cta-form-header {
+  margin-bottom: 24px;
+}
+
+.cta-form-header h3 {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: #2c2a00;
+  margin-bottom: 4px;
+}
+
+.cta-form-header p {
+  font-size: 0.85rem;
+  color: #7a7040;
+}
+
+/* Input wraps */
+.cta-input-wrap {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #fffde7;
+  border: 1.5px solid #e0d870;
+  border-radius: 12px;
+  padding: 0 16px;
+  margin-bottom: 12px;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.cta-input-wrap:focus-within {
+  border-color: #c9a800;
+  box-shadow: 0 0 0 3px rgba(200, 168, 0, 0.15);
+}
+
+.cta-input-wrap span {
+  font-size: 1.1rem;
+  flex-shrink: 0;
+}
+
+.cta-input-wrap input,
+.cta-input-wrap select {
+  width: 100%;
+  background: transparent;
+  border: none;
+  outline: none;
+  padding: 14px 0;
+  font-size: 0.92rem;
+  color: #2c2a00;
+  font-family: inherit;
+}
+
+.cta-input-wrap input::placeholder {
+  color: #b0a860;
+}
+
+.cta-input-wrap select {
+  color: #2c2a00;
+  cursor: pointer;
+}
+
+.cta-input-wrap select option {
+  background: #fffde7;
+  color: #2c2a00;
+}
+
+/* CTA Button */
+.cta-btn {
+  width: 100%;
+  padding: 16px;
+  background: linear-gradient(135deg, #d4a800, #a07800);
+  color: #fff;
+  font-size: 1.05rem;
+  font-weight: 800;
+  border: none;
+  border-radius: 14px;
+  cursor: pointer;
+  letter-spacing: 0.5px;
+  margin-top: 6px;
+  transition: transform 0.2s, opacity 0.2s;
+  box-shadow: 0 6px 24px rgba(180, 140, 0, 0.35);
+}
+
+.cta-btn:hover {
+  transform: translateY(-2px);
+  opacity: 0.92;
+}
+
+.cta-note {
+  text-align: center;
+  font-size: 0.78rem;
+  color: #9a9060;
+  margin-top: 12px;
+  margin-bottom: 0;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .cta-inner {
+    grid-template-columns: 1fr;
+  }
+  .cta-text h2 {
+    font-size: 2.2rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .cta-text h2 {
+    font-size: 1.8rem;
+  }
+  .cta-form-card {
+    padding: 24px 18px;
+  }
+  .cta-price {
+    font-size: 2rem;
+  }
+}
+ 
 /* FOOTER */
 .footer {
   background: #0f2533;
@@ -344,4 +754,797 @@ h2 { font-size: 2rem; font-weight: 800; color: #1a1a1a; margin-bottom: 0.4rem; }
   display: flex;
   flex-direction: column;
   gap: 0.4rem;
+}
+.hero {
+  position: relative;
+  height: 100vh;   /* FULL SCREEN */
+  overflow: hidden;
+}
+.hero-buttons {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;   /* handles small screens */
+  justify-content: center;
+}
+
+/* ITINERARY WITH MAP */
+.itinerary-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  gap: 3rem;
+  align-items: flex-start;
+}
+
+.itinerary-left {
+  flex: 1;
+  min-width: 0;
+}
+
+/* ─────────────────────────────────────────
+   MAP IMAGE — adjust these two values:
+   width  → how wide the image is
+   height → locks the image height (image crops to fit)
+   Change width to make it bigger/smaller.
+   Change height to make it taller/shorter.
+───────────────────────────────────────── */
+.itinerary-map-wrap {
+  flex: 0 0 800px;        /* ← CHANGE THIS NUMBER to resize width (px) */
+  position: sticky;
+  top: 90px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.itinerary-map-img {
+  width: 100%;
+  height: 600px;          /* ← CHANGE THIS NUMBER to resize height (px) */
+  object-fit: cover;      /* crops overflow cleanly */
+  object-position: center;
+  border-radius: 18px;
+  box-shadow: 0 12px 40px rgba(0,0,0,0.35);
+  border: 2px solid rgba(255,255,255,0.15);
+  transition: transform 0.3s;
+}
+
+.itinerary-map-img:hover {
+  transform: scale(1.02);
+}
+
+.itinerary-map-label {
+  text-align: center;
+  color: rgba(255,255,255,0.7);
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+}
+
+@media (max-width: 900px) {
+  .itinerary-inner {
+    flex-direction: column;
+  }
+  .itinerary-map-wrap {
+    flex: none;
+    width: 100%;
+    position: static;
+  }
+  .itinerary-map-img {
+    height: 260px;        /* ← mobile height */
+  }
+}
+.itinerary-left {
+  flex: 1;
+  min-width: 0;
+  height: 600px;         /* matches image height */
+  overflow-y: auto;      /* scrolls inside if content is longer */
+}
+
+.itinerary-left::-webkit-scrollbar { width: 4px; }
+.itinerary-left::-webkit-scrollbar-thumb {
+  background: rgba(255,255,255,0.25);
+  border-radius: 4px;
+}
+
+/* Simple one-line itinerary list */
+.simple-timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  margin-top: 1rem;
+}
+
+.simple-timeline-row {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.45rem 0.75rem;
+  border-radius: 10px;
+  background: rgba(255,255,255,0.18);
+  border: 1px solid rgba(255,255,255,0.3);
+  color: #fff;
+  font-size: 0.9rem;
+}
+
+.simple-day-label {
+  font-weight: 700;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: rgba(255,255,255,0.8);
+}
+
+.simple-title {
+  font-weight: 500;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.itinerary-map-wrap {
+  flex: 0 0 800px;
+  position: sticky;
+  top: 90px;
+}
+
+.itinerary-map-clickable {
+  position: relative;   /* IMPORTANT: hotspots are inside this */
+  width: 100%;
+  height: 600px;        /* same as image height */
+}
+
+.itinerary-map-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 18px;
+}
+
+/* generic hotspot – this makes it appear ON the map */
+.map-hotspot {
+  position: absolute;
+  background: transparent;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  transform: translate(-50%, -50%);  /* centers dot on coordinates */
+  color: #fff;
+  font-size: 0.7rem;
+  text-shadow: 0 1px 3px rgba(0,0,0,0.6);
+  z-index: 3;                         /* above the image */
+}
+
+.map-hotspot .hotspot-dot {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  background: #FFFBB1;
+  box-shadow: 0 0 8px #FFFBB1;
+}
+/* Hide dot + label initially */
+.hotspot-dot,
+.hotspot-label {
+  opacity: 0;
+  pointer-events: none;      /* they don't block clicks */
+  transition: opacity 0.2s ease;
+}
+.map-hotspot .hotspot-label {
+  background: rgba(0,0,0,0.55);
+  padding: 2px 6px;
+  border-radius: 10px;
+}
+nothing visible
+.map-hotspot .hotspot-dot,
+.map-hotspot .hotspot-label {
+  display: none;
+}
+/* Layout when visible */
+.map-hotspot {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+/* On hover: show dot + label */
+.map-hotspot:hover .hotspot-dot,
+.map-hotspot:hover .hotspot-label {
+  opacity: 1;
+}
+/* Hover card on map */
+.map-hover-card {
+  position: absolute;
+  bottom: 120%;   /* appears above pointer */
+  left: 50%;
+  transform: translateX(-50%) translateY(10px);
+  
+  width: 220px;
+  padding: 10px 12px;
+
+  background: rgba(0,0,0,0.75);
+  color: #fff;
+  border-radius: 12px;
+
+  font-size: 0.75rem;
+  line-height: 1.4;
+
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.25s ease;
+
+  backdrop-filter: blur(6px);
+  border: 1px solid rgba(255,255,255,0.2);
+}
+
+/* Title inside hover */
+.map-hover-title {
+  font-weight: 700;
+  font-size: 0.85rem;
+  margin-bottom: 2px;
+}
+
+/* Day */
+.map-hover-day {
+  font-size: 0.7rem;
+  opacity: 0.7;
+}
+
+/* SHOW on hover */
+.map-hotspot:hover .map-hover-card {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+.place-detail-card {
+  background: rgba(255,255,255,0.15);
+  backdrop-filter: blur(10px);
+  padding: 1.5rem;
+  border-radius: 16px;
+  color: #fff;
+  position: relative;
+  border: 1px solid rgba(255,255,255,0.2);
+}
+
+.place-detail-close {
+  position: absolute;
+  top: 10px;
+  right: 12px;
+  background: transparent;
+  border: none;
+  color: #fff;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.place-extra {
+  margin: 1rem 0;
+  font-size: 0.9rem;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+/* ────────────────────────── MAP HOTSPOTS ────────────────────────── */
+
+/* Invisible hotspot trigger - only handles hover area */
+.map-hotspot {
+  position: absolute;
+  background: transparent;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  /* Hover area size */
+  width: 50px;
+  height: 50px;
+  transform: translate(-50%, -50%);
+  z-index: 3;
+  transition: none;
+}
+
+/* Hide ALL dot/label elements completely */
+.map-hotspot .hotspot-dot,
+.map-hotspot .hotspot-label,
+.map-hotspot::before,
+.map-hotspot::after {
+  display: none !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+}
+
+/* Overlay card - hidden by default */
+.map-hotspot-card {
+  position: absolute;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(15px);
+  border-radius: 16px;
+  padding: 1.2rem;
+  box-shadow: 0 16px 50px rgba(0, 0, 0, 0.3);
+  min-width: 240px;
+  max-width: 280px;
+  opacity: 0;
+  visibility: hidden;
+  transform: translate(20px, -10px) scale(0.95);
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  z-index: 4;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  font-family: inherit;
+  color: #1a1a4a;
+  left: 60px;  /* Right of hotspot */
+  top: -20px;
+  pointer-events: none; /* Cards don't block other hotspots */
+}
+
+.map-hotspot:hover + .map-hotspot-card {
+  opacity: 1;
+  visibility: visible;
+  transform: translate(0, 0) scale(1);
+  pointer-events: auto;
+}
+
+/* Mobile: card appears as full overlay */
+@media (max-width: 900px) {
+  .map-hotspot-card {
+    position: fixed;
+    left: auto !important;
+    right: 20px !important;
+    top: 50% !important;
+    transform: translateY(-50%) translateX(20px) scale(0.95) !important;
+    min-width: 300px;
+    max-width: 90vw;
+  }
+}
+/* ────────────────────────── MAP HOTSPOTS ────────────────────────── */
+
+/* Invisible hotspot trigger - only handles hover area */
+.map-hotspot {
+  position: absolute;
+  background: transparent;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  /* Hover area size */
+  width: 50px;
+  height: 50px;
+  transform: translate(-50%, -50%);
+  z-index: 3;
+  transition: none;
+}
+
+/* Hide ALL dot/label elements completely */
+.map-hotspot .hotspot-dot,
+.map-hotspot .hotspot-label,
+.map-hotspot::before,
+.map-hotspot::after {
+  display: none !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+}
+
+/* Overlay card - hidden by default */
+.map-hotspot-card {
+  position: absolute;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(15px);
+  border-radius: 16px;
+  padding: 1.2rem;
+  box-shadow: 0 16px 50px rgba(0, 0, 0, 0.3);
+  min-width: 240px;
+  max-width: 280px;
+  opacity: 0;
+  visibility: hidden;
+  transform: translate(20px, -10px) scale(0.95);
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  z-index: 4;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  font-family: inherit;
+  color: #1a1a4a;
+  left: 60px;  /* Right of hotspot */
+  top: -20px;
+  pointer-events: none; /* Cards don't block other hotspots */
+}
+
+.map-hotspot:hover + .map-hotspot-card {
+  opacity: 1;
+  visibility: visible;
+  transform: translate(0, 0) scale(1);
+  pointer-events: auto;
+}
+
+/* Mobile: card appears as full overlay */
+@media (max-width: 900px) {
+  .map-hotspot-card {
+    position: fixed;
+    left: auto !important;
+    right: 20px !important;
+    top: 50% !important;
+    transform: translateY(-50%) translateX(20px) scale(0.95) !important;
+    min-width: 300px;
+    max-width: 90vw;
+  }
+}
+.desc {
+  white-space: pre-line;
+}
+.map-card {
+  position: absolute;
+  background: white;
+  padding: 12px;
+  border-radius: 10px;
+  width: 220px;
+  transform: translate(-50%, -110%);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+}
+
+.desc {
+  display: flex;
+  flex-direction: column;
+}
+
+.desc p {
+  margin: 3px 0;
+  font-size: 13px;
+}
+.hero-masonry-bg {
+  position: relative; /* Already there? */
+}
+.hero-masonry-bg > div { /* Targets Canvas wrapper */
+  pointer-events: none; /* Clicks pass to masonry */
+}
+/* ── ABOUT SECTION ───────────────────────────── */
+.about {
+  padding: 80px 5%;
+  background: #fffde7;
+}
+
+.about .section-inner {
+  display: grid;
+  grid-template-columns: 1fr 420px;
+  gap: 60px;
+  align-items: start;
+  max-width: 1300px;
+  margin: 0 auto;
+}
+
+/* Badge */
+.about-badge {
+  display: inline-block;
+  background: rgba(180, 140, 0, 0.1);
+  color: #a07800;
+  border: 1px solid rgba(180, 140, 0, 0.25);
+  border-radius: 20px;
+  padding: 4px 14px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  margin-bottom: 14px;
+  text-transform: uppercase;
+}
+
+.about-text h2 {
+  font-size: 2.4rem;
+  font-weight: 800;
+  color: #2c2a00;
+  margin-bottom: 16px;
+}
+
+.about-text p {
+  color: #4a4520;
+  line-height: 1.8;
+  margin-bottom: 14px;
+  font-size: 1rem;
+}
+
+/* Highlights */
+.highlights {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 20px 0 30px;
+}
+
+.highlight-item {
+  background: #fdf9c4;
+  border: 1px solid #e8e09a;
+  border-radius: 8px;
+  padding: 6px 14px;
+  font-size: 0.88rem;
+  color: #3a3600;
+  box-shadow: 0 2px 6px rgba(180,160,0,0.08);
+}
+
+/* Stats Row */
+.about-stats-row {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 30px;
+  flex-wrap: wrap;
+}
+
+.about-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #fefce8;
+  border: 1px solid #e0d870;
+  border-radius: 14px;
+  padding: 14px 20px;
+  min-width: 80px;
+  box-shadow: 0 2px 10px rgba(180,160,0,0.08);
+}
+
+.about-stat-num {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: #b38f00;
+}
+
+.about-stat-label {
+  font-size: 0.75rem;
+  color: #7a7040;
+  margin-top: 4px;
+}
+
+/* Quick Info Grid */
+.about-quick-info {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.quick-info-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: #fefce8;
+  border: 1px solid #e6df88;
+  border-radius: 12px;
+  padding: 12px 14px;
+  box-shadow: 0 1px 6px rgba(0,0,0,0.04);
+}
+
+.quick-info-item span {
+  font-size: 1.3rem;
+}
+
+.quick-info-item label {
+  display: block;
+  font-size: 0.72rem;
+  color: #9a9060;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  margin-bottom: 2px;
+}
+
+.quick-info-item strong {
+  color: #2c2a00;
+  font-size: 0.9rem;
+}
+
+/* ── LEADER CARD ─────────────────────────────── */
+.leader-card {
+  background: #fefce8;
+  border: 1px solid #dfd96e;
+  border-radius: 24px;
+  padding: 30px;
+  position: sticky;
+  top: 90px;
+  box-shadow: 0 10px 40px rgba(180, 160, 0, 0.1);
+}
+
+.leader-card-top {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  margin-bottom: 18px;
+}
+
+.leader-avatar-wrap {
+  position: relative;
+  flex-shrink: 0;
+}
+
+.leader-avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  border: 3px solid #c9a800;
+  object-fit: cover;
+}
+
+.leader-verified {
+  position: absolute;
+  bottom: -4px;
+  right: -4px;
+  background: #5cb85c;
+  color: #fff;
+  font-size: 0.6rem;
+  font-weight: 700;
+  padding: 2px 6px;
+  border-radius: 10px;
+  border: 2px solid #fefce8;
+}
+
+.leader-role {
+  font-size: 0.75rem;
+  color: #a07800;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 700;
+}
+
+.leader-name {
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: #2c2a00;
+  margin: 4px 0;
+}
+
+.leader-location {
+  font-size: 0.82rem;
+  color: #7a7040;
+  margin-bottom: 6px;
+}
+
+.leader-rating {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.82rem;
+  color: #d4a000;
+}
+
+.leader-rating span {
+  color: #2c2a00;
+  font-weight: 700;
+}
+
+.leader-rating small {
+  color: #a09860;
+}
+
+.leader-bio {
+  font-size: 0.88rem;
+  color: #4a4520;
+  line-height: 1.7;
+  margin-bottom: 20px;
+  border-left: 3px solid #c9a800;
+  padding-left: 12px;
+}
+
+/* Leader Stats */
+.leader-stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  margin-bottom: 22px;
+}
+
+.leader-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #fdf8c0;
+  border-radius: 12px;
+  padding: 10px 6px;
+  border: 1px solid #e0d860;
+}
+
+.leader-stat-num {
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: #b38f00;
+}
+
+.leader-stat-label {
+  font-size: 0.65rem;
+  color: #7a7040;
+  text-align: center;
+  margin-top: 3px;
+}
+
+/* Certifications */
+.leader-certs {
+  margin-bottom: 18px;
+}
+
+.leader-certs h4 {
+  font-size: 0.88rem;
+  color: #2c2a00;
+  margin-bottom: 10px;
+  font-weight: 700;
+}
+
+.leader-certs ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.leader-certs ul li {
+  font-size: 0.82rem;
+  color: #4a4520;
+  background: #fdf9c4;
+  border-radius: 8px;
+  padding: 6px 10px;
+  border-left: 2px solid #c9a800;
+}
+
+/* Specialties */
+.leader-specialties {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.leader-specialties span {
+  background: #fdf5a0;
+  border: 1px solid #dfd060;
+  border-radius: 20px;
+  padding: 4px 12px;
+  font-size: 0.78rem;
+  color: #7a6200;
+  font-weight: 600;
+}
+
+/* Languages */
+.leader-languages {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.82rem;
+  color: #7a7040;
+  margin-bottom: 20px;
+}
+
+.leader-languages strong {
+  color: #2c2a00;
+}
+
+/* Leader CTA */
+.leader-cta {
+  display: block;
+  text-align: center;
+  background: linear-gradient(135deg, #d4a800, #a07800);
+  color: #fff;
+  font-weight: 700;
+  font-size: 0.95rem;
+  padding: 14px;
+  border-radius: 14px;
+  text-decoration: none;
+  letter-spacing: 0.5px;
+  transition: opacity 0.2s, transform 0.2s;
+  box-shadow: 0 6px 20px rgba(180, 140, 0, 0.3);
+}
+
+.leader-cta:hover {
+  opacity: 0.9;
+  transform: translateY(-2px);
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .about .section-inner {
+    grid-template-columns: 1fr;
+  }
+  .leader-card {
+    position: static;
+  }
+  .about-quick-info {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  .about-quick-info {
+    grid-template-columns: 1fr;
+  }
+  .leader-stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .about-stats-row {
+    justify-content: center;
+  }
 }
