@@ -1,13 +1,12 @@
 import React, { useState, useRef, useEffect } from 'react'
 import gsap from 'gsap'
 import { MotionPathPlugin } from 'gsap/MotionPathPlugin'
+import ElectricBorder from './ElectricBorder'
 
 import './App.css'
 import Masonry from './components/Masonry/Masonry'
 import ClickSpark from './ClickSpark'
-import { Canvas } from '@react-three/fiber'
-import { OrbitControls, Environment } from '@react-three/drei'
-import ThreeCar from './components/ThreeCar'  // Adjust path
+import TextType from './TextType'
 
 
 import img1 from './components/phots/1.jpg'
@@ -332,8 +331,23 @@ export default function App() {
 
     {/* LEFT: Trip Info */}
     <div className="about-text">
-      <div className="about-badge">🏔️ Featured Trek</div>
-      <h2>About This Trek</h2>
+      <div className="about-badge">🏔️ Featured Trek</div><br></br>
+      
+      <TextType
+        as="h2"
+        text={[
+          "About The Trek",
+          "About The Leader",
+        ]}
+        typingSpeed={55}
+        deletingSpeed={30}
+        pauseDuration={2000}
+        showCursor
+        cursorCharacter="|"
+        cursorBlinkDuration={0.5}
+        loop
+        className="about-typetext"
+      />
       <p>
         The <strong>Kullu Manali &amp; Hampta Pass Trek</strong> is one of India's most iconic
         Himalayan adventures. Starting from the lush green valleys of Kullu and Manali, this journey
@@ -390,88 +404,97 @@ export default function App() {
     </div>
 
     {/* RIGHT: Trip Leader Card */}
-    <div className="leader-card">
-      <div className="leader-card-top">
-        <div className="leader-avatar-wrap">
-          <img
-            src="https://randomuser.me/api/portraits/men/32.jpg"
-            alt="Trip Leader"
-            className="leader-avatar"
-          />
-          <span className="leader-verified">✔ Verified</span>
-        </div>
-        <div className="leader-intro">
-          <div className="leader-role">Your Trip Leader</div>
-          <h3 className="leader-name">Arjun Thakur</h3>
-          <div className="leader-location">📍 Manali, Himachal Pradesh</div>
-          <div className="leader-rating">
-            ⭐⭐⭐⭐⭐ <span>4.9 / 5</span>
-            <small>(312 reviews)</small>
+    <ElectricBorder
+      color="#8ab8d8"
+      speed={1.2}
+      chaos={0.15}
+      thickness={2}
+      style={{ borderRadius: '24px' , padding: '8px',}}
+    >
+      <div className="leader-card">
+
+        <div className="leader-card-top">
+          <div className="leader-avatar-wrap">
+            <img
+              src="https://randomuser.me/api/portraits/men/32.jpg"
+              alt="Trip Leader"
+              className="leader-avatar"
+            />
+            <span className="leader-verified">✔ Verified</span>
+          </div>
+          <div className="leader-intro">
+            <div className="leader-role">Your Trip Leader</div>
+            <h3 className="leader-name">Arjun Thakur</h3>
+            <div className="leader-location">📍 Manali, Himachal Pradesh</div>
+            <div className="leader-rating">
+              ⭐⭐⭐⭐⭐ <span>4.9 / 5</span>
+              <small>(312 reviews)</small>
+            </div>
           </div>
         </div>
-      </div>
 
-      <p className="leader-bio">
-        Born and raised in the Himalayas, Arjun has spent over 12 years guiding trekkers across
-        Himachal Pradesh and Ladakh. His calm demeanor, deep knowledge of mountain terrain, and
-        genuine care for every group member makes him the backbone of every Trovia expedition.
-      </p>
+        <p className="leader-bio">
+          Born and raised in the Himalayas, Arjun has spent over 12 years guiding trekkers across
+          Himachal Pradesh and Ladakh. His calm demeanor, deep knowledge of mountain terrain, and
+          genuine care for every group member makes him the backbone of every Trovia expedition.
+        </p>
 
-      {/* Leader Stats */}
-      <div className="leader-stats">
-        <div className="leader-stat">
-          <span className="leader-stat-num">180+</span>
-          <span className="leader-stat-label">Treks Led</span>
+        {/* Leader Stats */}
+        <div className="leader-stats">
+          <div className="leader-stat">
+            <span className="leader-stat-num">180+</span>
+            <span className="leader-stat-label">Treks Led</span>
+          </div>
+          <div className="leader-stat">
+            <span className="leader-stat-num">2,400+</span>
+            <span className="leader-stat-label">Trekkers</span>
+          </div>
+          <div className="leader-stat">
+            <span className="leader-stat-num">12 yrs</span>
+            <span className="leader-stat-label">Experience</span>
+          </div>
+          <div className="leader-stat">
+            <span className="leader-stat-num">0</span>
+            <span className="leader-stat-label">Incidents</span>
+          </div>
         </div>
-        <div className="leader-stat">
-          <span className="leader-stat-num">2,400+</span>
-          <span className="leader-stat-label">Trekkers</span>
+
+        {/* Certifications */}
+        <div className="leader-certs">
+          <h4>🎖️ Certifications & Training</h4>
+          <ul>
+            <li>🏔️ Basic & Advanced Mountaineering (NIM Uttarkashi)</li>
+            <li>🏥 Wilderness First Responder (WFR Certified)</li>
+            <li>🗺️ High Altitude Trekking Guide (IMF)</li>
+            <li>🌦️ Mountain Weather & Safety Training</li>
+            <li>🧗 Rock Climbing & Rappelling Certified</li>
+          </ul>
         </div>
-        <div className="leader-stat">
-          <span className="leader-stat-num">12 yrs</span>
-          <span className="leader-stat-label">Experience</span>
+
+        {/* Specialties */}
+        <div className="leader-specialties">
+          <span>❄️ Snow Treks</span>
+          <span>🏕️ Camping</span>
+          <span>🗺️ Navigation</span>
+          <span>🚑 First Aid</span>
+          <span>📸 Photography</span>
+          <span>🍳 Camp Cooking</span>
         </div>
-        <div className="leader-stat">
-          <span className="leader-stat-num">0</span>
-          <span className="leader-stat-label">Incidents</span>
+
+        {/* Languages */}
+        <div className="leader-languages">
+          <span>🗣️ Speaks:</span>
+          <strong>Hindi &nbsp;|&nbsp; English &nbsp;|&nbsp; Pahari</strong>
         </div>
-      </div>
 
-      {/* Certifications */}
-      <div className="leader-certs">
-        <h4>🎖️ Certifications & Training</h4>
-        <ul>
-          <li>🏔️ Basic & Advanced Mountaineering (NIM Uttarkashi)</li>
-          <li>🏥 Wilderness First Responder (WFR Certified)</li>
-          <li>🗺️ High Altitude Trekking Guide (IMF)</li>
-          <li>🌦️ Mountain Weather & Safety Training</li>
-          <li>🧗 Rock Climbing & Rappelling Certified</li>
-        </ul>
-      </div>
+        <a href="#book" className="leader-cta">
+          🏔️ Trek with Arjun
+        </a>
 
-      {/* Specialties */}
-      <div className="leader-specialties">
-        <span>❄️ Snow Treks</span>
-        <span>🏕️ Camping</span>
-        <span>🗺️ Navigation</span>
-        <span>🚑 First Aid</span>
-        <span>📸 Photography</span>
-        <span>🍳 Camp Cooking</span>
       </div>
-
-      {/* Languages */}
-      <div className="leader-languages">
-        <span>🗣️ Speaks:</span>
-        <strong>Hindi &nbsp;|&nbsp; English &nbsp;|&nbsp; Pahari</strong>
-      </div>
-
-      <a href="#book" className="leader-cta">
-        🏔️ Trek with Arjun
-      </a>
+    </ElectricBorder>
     </div>
-
-  </div>
-</section>
+  </section>
 
 
       {/* ITINERARY + INTERACTIVE MAP */}

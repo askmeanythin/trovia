@@ -1320,15 +1320,7 @@ nothing visible
 }
 
 /* ── LEADER CARD ─────────────────────────────── */
-.leader-card {
-  background: #fefce8;
-  border: 1px solid #dfd96e;
-  border-radius: 24px;
-  padding: 30px;
-  position: sticky;
-  top: 90px;
-  box-shadow: 0 10px 40px rgba(180, 160, 0, 0.1);
-}
+
 
 .leader-card-top {
   display: flex;
@@ -1547,4 +1539,17 @@ nothing visible
   .about-stats-row {
     justify-content: center;
   }
+}
+.about-typetext {
+  font-size: 1.05rem;
+  color: #a07800;
+  font-weight: 600;
+  min-height: 1.8rem;
+  margin-bottom: 14px;
+  line-height: 1.7;
+}
+
+.about-typetext .text-type__cursor {
+  color: #c9a800;
+  font-weight: 400;
 }
