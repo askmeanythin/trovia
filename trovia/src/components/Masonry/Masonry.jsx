@@ -1,24 +1,27 @@
-import { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
+import { useEffect, useLayoutEffect, useMemo, useRef, useState, useCallback } from 'react';
 import { gsap } from 'gsap';
 import './Masonry.css';
 
 const useMedia = (queries, values, defaultValue) => {
-  const get = () =>
-    values[queries.findIndex(q => matchMedia(q).matches)] ?? defaultValue;
+  const get = useCallback(() => {
+    return values[queries.findIndex(q => matchMedia(q).matches)] ?? defaultValue;
+  }, [queries, values, defaultValue]);
 
   const [value, setValue] = useState(get);
 
   useEffect(() => {
     const handler = () => setValue(get());
+
     queries.forEach(q => matchMedia(q).addEventListener('change', handler));
+
     return () =>
       queries.forEach(q =>
         matchMedia(q).removeEventListener('change', handler)
       );
-  }, [queries,get]);
+  }, [queries, get]);
 
-  return value;
-};
+    return value;
+  };
 
 const useMeasure = () => {
   const ref = useRef(null);
