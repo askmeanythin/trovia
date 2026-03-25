@@ -15,7 +15,7 @@ const useMedia = (queries, values, defaultValue) => {
       queries.forEach(q =>
         matchMedia(q).removeEventListener('change', handler)
       );
-  }, [queries]);
+  }, [queries,get]);
 
   return value;
 };
